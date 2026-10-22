@@ -43,9 +43,7 @@ class MainActivity : ComponentActivity() {
                             SegundaPerguntaScreen(navController = navController)
                         }
 
-                        composable ( route = "terceira_pergunta") {
-                            TerceiraPerguntaScreen(navController = navController)
-                        }
+
 
 
                     }

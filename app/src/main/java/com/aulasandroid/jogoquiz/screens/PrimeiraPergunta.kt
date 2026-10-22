@@ -35,6 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.aulasandroid.jogoquiz.R
 
@@ -64,7 +65,9 @@ fun PrimeiraPerguntaScreen(modifier: Modifier = Modifier, navController: NavHost
             color = Color(0xFF86CE95),
             shape = RoundedCornerShape(16.dp),
             border = BorderStroke(1.dp, Color.Black),
-            modifier = Modifier.width(240.dp).height(62.dp)
+            modifier = Modifier
+                .width(240.dp)
+                .height(62.dp)
 
         ) {
             Box(contentAlignment = Alignment.Center) {
@@ -98,32 +101,39 @@ fun PrimeiraPerguntaScreen(modifier: Modifier = Modifier, navController: NavHost
                 )
 
                 listaAlternativas.forEach { alternativa ->
-                    Button(
-                        onClick = {
-                            navController.navigate("segundaPergunta")
-                        },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(12.dp),
-                        border = BorderStroke(1.dp, Color(0xFFD9D9D9)),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(55.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            Text(
-                                text = alternativa,
-                                color = Color.Black,
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.Normal
-                            )
-                        }
-                    }
+                    Opcao(modifier = modifier, texto = alternativa, navController = navController, correta = false)
                 }
+
             }
         }
 
+    }
+}
+
+
+@Composable
+fun Opcao (modifier: Modifier = Modifier, texto: String, correta: Boolean, navController: NavController) {
+    Button(
+        onClick = {
+            navController.navigate("segundaPergunta")
+        },
+        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(1.dp, Color(0xFFD9D9D9)),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(55.dp)
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Text(
+                text = texto,
+                color = Color.Black,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Normal
+            )
+        }
     }
 }
